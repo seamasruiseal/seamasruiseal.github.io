@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="Srimagge.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>My Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'DIN Alternate', 'DIN Condensed', sans-serif;
+            line-height: 1.6;
+            background-color: #0a0a0a;
+            color: #ffffff;
+        }
+
+        .content {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .page-transition.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #4170B5 0%, #3A5F9E 100%);
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid #3A5F9E;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'DIN Alternate', 'DIN Condensed', sans-serif;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            cursor: default;
+        }
+
+
+
+
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #cccccc;
+            transform: translateY(-1px);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: linear-gradient(135deg, #4170B5 0%, #3A5F9E 100%);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.3);
+                padding: 2rem 0;
+                gap: 1rem;
+                border-top: 1px solid #3A5F9E;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-link {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+
+            .nav-link:hover {
+                color: #cccccc;
+                transform: none;
+            }
+
+            /* Home section mobile */
+            #home {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+                padding: 1rem;
+            }
+
+            .profile-picture {
+                width: 200px;
+                height: 200px;
+            }
+
+            .home-greeting {
+                font-size: 2.5rem;
+            }
+
+            .home-content p {
+                font-size: 1rem;
+                white-space: normal;
+                transform: none;
+            }
+
+            /* About section mobile */
+            .about-content {
+                flex-direction: column;
+                gap: 2rem;
+                margin-top: 1rem;
+            }
+
+            .about-text-container {
+                max-width: 100%;
+            }
+
+            .rowing-image {
+                width: 280px;
+                height: 280px;
+                margin: 0 auto;
+            }
+
+            #about-text {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            /* Section headings mobile */
+            .section h1 {
+                font-size: 2.5rem;
+            }
+
+            .section p {
+                font-size: 1rem;
+            }
+
+            /* Tufts logo mobile */
+            .tufts-logo {
+                text-align: center;
+                padding-right: 0;
+                margin-top: 2rem;
+            }
+
+            .tufts-logo img {
+                width: 80px;
+            }
+
+            .tufts-logo p {
+                font-size: 1rem;
+            }
+
+            .tufts-logo .degree {
+                font-size: 0.9rem;
+            }
+
+            .tufts-logo .dates {
+                font-size: 0.8rem;
+            }
+
+            /* Projects mobile */
+            .projects-container {
+                gap: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .projects-row {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .projects-row.first,
+            .projects-row.second {
+                justify-content: center;
+            }
+
+            .project-item {
+                width: 100%;
+            }
+
+            .project-image {
+                height: 100px;
+            }
+
+            .project-item h3 {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Content styles for demonstration */
+        .content {
+            margin-top: 80px;
+            padding: 1rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .section {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        #projects {
+            min-height: 70vh;
+            margin-top: 6rem;
+        }
+
+        #about {
+            text-align: center;
+            align-items: center;
+            padding-top: 6rem;
+            margin-top: 6rem;
+        }
+
+        #about h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 3rem;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .about-text-container {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .rowing-image {
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            flex-shrink: 0;
+            margin-left: auto;
+        }
+
+        #about-text {
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background-color: #cccccc;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        #home {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            gap: 4rem;
+        }
+
+        .section h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .section p {
+            font-size: 1.2rem;
+            color: #cccccc;
+            max-width: 600px;
+        }
+
+        #home {
+            background: #0a0a0a;
+            color: white;
+            position: relative;
+        }
+
+        #home h1, #home p {
+            color: white;
+        }
+
+        #about {
+            background: #0a0a0a;
+        }
+
+        #projects {
+            background: #0a0a0a;
+        }
+
+        #contact {
+            background: #0a0a0a;
+        }
+
+        .profile-picture {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: 30% 50%;
+            flex-shrink: 0;
+        }
+
+        .home-content {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .home-greeting {
+            font-size: 3.5rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .home-content p {
+            white-space: nowrap;
+            font-size: 1.2rem;
+            color: #cccccc;
+            text-align: center;
+            width: 100%;
+            transform: translateX(-10px);
+        }
+
+        .linkedin-icon {
+            color: #ffffff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .linkedin-icon:hover {
+            color: #cccccc;
+            transform: translateY(-1px);
+        }
+
+        .tufts-logo {
+            position: relative;
+            text-align: right;
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+            padding-right: 2rem;
+        }
+
+        .tufts-logo img {
+            width: 120px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .tufts-logo p {
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .tufts-logo .degree {
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 400;
+            margin: 0.5rem 0;
+            opacity: 0.8;
+        }
+
+        .tufts-logo .dates {
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 400;
+            margin: 0;
+            opacity: 0.7;
+        }
+
+        .projects-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            margin-top: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .projects-row {
+            display: flex;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .projects-row.first {
+            justify-content: center;
+        }
+
+        .projects-row.second {
+            justify-content: space-between;
+            margin-left: 2rem;
+        }
+
+        .project-item {
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .project-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(128, 128, 128, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 15px;
+        }
+
+        .project-item:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-overlay-text {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 280px !important;
+            object-fit: cover !important;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .project-image {
+                height: 160px !important;
+            }
+        }
+
+        .project-item:nth-child(1) .project-image,
+        .project-item:nth-child(2) .project-image,
+        .project-item:nth-child(3) .project-image,
+        .project-item:nth-child(4) .project-image {
+            height: 280px !important;
+            object-fit: cover !important;
+        }
+
+        .project-item:nth-child(3) .project-image {
+            height: 280px !important;
+            max-width: 80% !important;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .project-item:nth-child(3) .project-overlay {
+            width: 80% !important;
+            left: 10% !important;
+            right: 10% !important;
+        }
+
+        @media (max-width: 768px) {
+            .project-item:nth-child(1) .project-image,
+            .project-item:nth-child(2) .project-image,
+            .project-item:nth-child(3) .project-image,
+            .project-item:nth-child(4) .project-image {
+                height: 160px !important;
+            }
+            .project-item:nth-child(3) .project-image {
+                height: 160px !important;
+                max-width: 80% !important;
+            }
+            .project-item:nth-child(3) .project-overlay {
+                width: 80% !important;
+                left: 10% !important;
+                right: 10% !important;
+            }
+        }
+
+        .project-image-container {
+            position: relative;
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        .project-item:nth-child(1) .project-overlay,
+        .project-item:nth-child(2) .project-overlay,
+        .project-item:nth-child(4) .project-overlay {
+            width: 100% !important;
+            left: 0 !important;
+            right: 0 !important;
+        }
+
+        .project-item:nth-child(3) .project-overlay {
+            width: 80% !important;
+            left: 10% !important;
+            right: 10% !important;
+        }
+
+        .project-item:nth-child(3) .project-image {
+            height: 280px !important;
+            max-width: 80% !important;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .project-item:nth-child(3) .project-overlay {
+            width: 80% !important;
+            left: 10% !important;
+            right: 10% !important;
+        }
+
+        @media (max-width: 768px) {
+            .project-item:nth-child(3) .project-image {
+                height: 160px !important;
+                max-width: 80% !important;
+            }
+            .project-item:nth-child(3) .project-overlay {
+                width: 80% !important;
+                left: 10% !important;
+                right: 10% !important;
+            }
+        }
+
+        .project-image-container {
+            position: relative;
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        .project-item:nth-child(3) .project-image {
+            max-height: 375px;
+        }
+
+        .more-projects {
+            text-align: center;
+        }
+
+        .more-item {
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .more-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .more-image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .more-image {
+            width: 100%;
+            height: 250px !important;
+            object-fit: cover !important;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .more-image {
+                height: 180px !important;
+            }
+        }
+
+        .more-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(128, 128, 128, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 15px;
+        }
+
+        .more-item:hover .more-overlay {
+            opacity: 1;
+        }
+
+        .more-overlay-text {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+
+
+        .project-item h3 {
+            margin-top: 1rem;
+            color: #4170b5;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .project-item:nth-child(2) h3 {
+            font-size: 1.4rem;
+        }
+
+        .project-item:nth-child(1) .project-overlay,
+        .project-item:nth-child(2) .project-overlay,
+        .project-item:nth-child(4) .project-overlay {
+            width: 100% !important;
+            left: 0 !important;
+            right: 0 !important;
+        }
+
+        .project-item:nth-child(3) .project-overlay {
+            width: 80% !important;
+            left: 10% !important;
+            right: 10% !important;
+        }
+
+        @media (max-width: 768px) {
+            .project-item:nth-child(1) .project-overlay,
+            .project-item:nth-child(2) .project-overlay,
+            .project-item:nth-child(4) .project-overlay {
+                width: 100% !important;
+                left: 0 !important;
+                right: 0 !important;
+            }
+            .project-item:nth-child(3) .project-overlay {
+                width: 80% !important;
+                left: 10% !important;
+                right: 10% !important;
+            }
+        }
+
+        .project-item:nth-child(1) .project-image {
+            height: 280px !important;
+            max-width: 95% !important;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .project-item:nth-child(2) .project-image {
+            height: 280px !important;
+            max-width: 85% !important;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .project-item:nth-child(4) .project-image {
+            height: 280px !important;
+            max-width: 95% !important;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .project-item:nth-child(1) .project-overlay {
+            width: 95% !important;
+            left: 2.5% !important;
+            right: 2.5% !important;
+        }
+
+        .project-item:nth-child(2) .project-overlay {
+            width: 85% !important;
+            left: 7.5% !important;
+            right: 7.5% !important;
+        }
+
+        .project-item:nth-child(4) .project-overlay {
+            width: 95% !important;
+            left: 2.5% !important;
+            right: 2.5% !important;
+        }
+
+        .project-item[data-href="fea.html"] .project-image {
+            object-fit: contain !important;
+            background-color: #1a1a1a;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <span class="logo">Seamas Ruiseal</span>
+            </div>
+
+            <div class="nav-right">
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="contact.html" class="nav-link" target="_self">Contact</a></li>
+                </ul>
+                
+                <a href="https://www.linkedin.com/in/seamas-ruiseal-1308b7270" target="_blank" class="linkedin-icon">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content">
+        <section id="home" class="section">
+            <img src="me.jpg" alt="Seamas Ruiseal" class="profile-picture">
+            <div class="home-content">
+                <h2 class="home-greeting">Hey, I'm Seamas Ruiseal</h2>
+                <p id="tagline-text"></p>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <h1>About Me</h1>
+            <div class="about-content">
+                <div class="about-text-container">
+                    <p id="about-text"></p>
+                </div>
+                <img src="rowing.jpg" alt="Rowing" class="rowing-image">
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <h1>My Projects</h1>
+            <div class="projects-container">
+                <div class="projects-row first">
+                    <div class="project-item" data-href="lightsaber.html">
+                        <div class="project-image-container">
+                            <img src="lightsaber.jpg" alt="Luke's Lightsaber Replica" class="project-image">
+                            <div class="project-overlay">
+                                <span class="project-overlay-text">Learn More</span>
+                            </div>
+                        </div>
+                        <h3>Luke's Lightsaber Replica</h3>
+                    </div>
+                    <div class="project-item" data-href="teardown.html">
+                        <div class="project-image-container">
+                            <img src="oscillatingtool1.jpg" alt="Teardown: Oscillating Multi-Tool" class="project-image">
+                            <div class="project-overlay">
+                                <span class="project-overlay-text">Learn More</span>
+                            </div>
+                        </div>
+                        <h3>Teardown: Oscillating Multi-Tool</h3>
+                    </div>
+                </div>
+                <div class="projects-row second">
+                    <div class="project-item" data-href="fea.html">
+                        <div class="project-image-container">
+                            <img src="fead.jpg" alt="Pull-Up Bar FEA" class="project-image">
+                            <div class="project-overlay">
+                                <span class="project-overlay-text">Learn More</span>
+                            </div>
+                        </div>
+                        <h3>Pull-Up Bar FEA</h3>
+                    </div>
+                    <div class="project-item" data-href="untangler.html">
+                        <div class="project-image-container">
+                            <img src="Hairbrush.jpg" alt="The Untangler" class="project-image">
+                            <div class="project-overlay">
+                                <span class="project-overlay-text">Learn More</span>
+                            </div>
+                        </div>
+                        <h3>The Untangler</h3>
+                    </div>
+                    <div class="project-item" data-href="more.html">
+                        <div class="project-image-container">
+                            <img src="more.jpg" alt="More Projects" class="project-image">
+                            <div class="project-overlay">
+                                <span class="project-overlay-text">Learn More</span>
+                            </div>
+                        </div>
+                        <h3>More Projects</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="tufts-logo">
+            <img src="Tufts_University_logo.png" alt="Tufts University Logo">
+            <p>Tufts University</p>
+            <p class="degree">BS in Mechanical Engineering</p>
+            <p class="degree">Minor in Engineering Management</p>
+            <p class="dates">September 2023 - May 2027</p>
+        </div>
+    </div>
+
+
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Page transition handling
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Only apply transition for external links (different pages)
+                if (link.getAttribute('href') && !link.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const targetUrl = link.getAttribute('href');
+                    
+                    // Fade out content instead of using overlay
+                    const content = document.querySelector('.content');
+                    content.style.opacity = '0';
+                    content.style.transform = 'translateY(20px)';
+                    
+                    // Navigate after transition
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 200);
+                } else {
+                    // For same-page links, just close mobile menu
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 0; // Account for fixed navbar and position lower
+                    const targetPosition = target.offsetTop - offset;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Active link highlighting based on scroll position
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // About text switching with typewriter effect
+        const aboutText = document.getElementById('about-text');
+        const texts = [
+            "I'm a rising junior studying Mechanical Engineering at Tufts, passionate about human-centered design and medical product innovation. Outside the classroom, you'll find me up early, rowing on the Malden River.",
+            "Rowing keeps me focused and grounded. Whether I'm training with the Tufts team or mentoring youth rowers, it's a space where I apply the same mindset I bring to engineering: consistency and teamwork.",
+            "I read a lot about how people think and behave — stuff like decision-making and habits. It definitely shapes how I see design."
+        ];
+        
+        let currentIndex = 0;
+        let isTyping = false;
+
+        function typeWriter(text, element, speed = 30, addCursor = true) {
+            return new Promise((resolve) => {
+                let i = 0;
+                element.innerHTML = '';
+                
+                function type() {
+                    if (i < text.length) {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                        setTimeout(type, speed);
+                    } else {
+                        // Add blinking cursor only if requested
+                        if (addCursor) {
+                            element.innerHTML += '<span class="cursor"></span>';
+                        }
+                        resolve();
+                    }
+                }
+                type();
+            });
+        }
+
+        async function switchText() {
+            if (isTyping) return;
+            isTyping = true;
+            
+            // Fade out
+            aboutText.style.opacity = '0';
+            
+            // Wait for fade out, then start typing new text
+            setTimeout(async () => {
+                currentIndex = (currentIndex + 1) % texts.length;
+                aboutText.style.opacity = '1';
+                
+                // Type the new text - only show cursor for first two paragraphs
+                const showCursor = currentIndex < 2;
+                await typeWriter(texts[currentIndex], aboutText, 15, showCursor);
+                
+                // Wait 8.5 seconds, then trigger next rotation
+                setTimeout(() => {
+                    isTyping = false;
+                    switchText();
+                }, 8500);
+            }, 800);
+        }
+
+        // Start the loop after initial text is typed
+        setTimeout(async () => {
+            // Type the first text
+            await typeWriter(texts[0], aboutText, 15);
+            
+            // Wait 8.5 seconds, then start the rotation
+            setTimeout(() => {
+                switchText();
+            }, 8500);
+        }, 1000);
+
+        // Project item click handling with fade transition
+        document.querySelectorAll('.project-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const targetUrl = item.getAttribute('data-href');
+                if (targetUrl) {
+                    e.preventDefault();
+                    
+                    // Fade out content instead of using overlay
+                    const content = document.querySelector('.content');
+                    content.style.opacity = '0';
+                    content.style.transform = 'translateY(20px)';
+                    
+                    // Navigate after transition
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 200);
+                }
+            });
+        });
+
+        // More projects click handling with fade transition
+        document.querySelectorAll('.more-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const targetUrl = item.getAttribute('data-href');
+                if (targetUrl) {
+                    e.preventDefault();
+                    
+                    // Fade out content instead of using overlay
+                    const content = document.querySelector('.content');
+                    content.style.opacity = '0';
+                    content.style.transform = 'translateY(20px)';
+                    
+                    // Navigate after transition
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 200);
+                }
+            });
+        });
+
+        // Tagline typewriter effect
+        const taglineText = document.getElementById('tagline-text');
+        const tagline = "Problem Solver – UX-Focused Creator – Rooted in Purposeful Design";
+
+        // Type the tagline on page load
+        setTimeout(async () => {
+            await typeWriter(tagline, taglineText, 30, false);
+        }, 500);
+
+    </script>
+</body>
+</html> 
